@@ -19,7 +19,7 @@ class MyLinkedList:
         self.__head: Node = None
 
     def get(self, index: int) -> int:
-        nodeStep = self.__head
+        nodeStep: Node = self.__head
         for i in range(index):
             nodeStep = nodeStep.getNext()
             if nodeStep is None:
@@ -27,10 +27,10 @@ class MyLinkedList:
         return nodeStep.getVal()
 
     def addAtHead(self, val: int) -> None:
-        self.__head = Node(val= val, next= self.__head)
+        self.__head: Node = Node(val= val, next= self.__head)
 
     def addAtTail(self, val: int) -> None:
-        nodeStep = self.__head
+        nodeStep: Node = self.__head
         while nodeStep.getNext() is not None:
             nodeStep = nodeStep.getNext()
         nodeStep.setNext(Node(val))
@@ -44,7 +44,7 @@ class MyLinkedList:
         nodeStep.setNext(Node(val, nodeStep.getNext()))
 
     def deleteAtIndex(self, index: int) -> None:
-        nodeStep = self.__head
+        nodeStep: Node = self.__head
         for i in range(index - 1):
             nodeStep = nodeStep.getNext()
             if nodeStep is None:
@@ -57,7 +57,7 @@ class MyLinkedList:
         nodeStep.setNext(nodeStep.getNext().getNext())
 
     def printList(self) -> None:
-        nodeStep = self.__head
+        nodeStep: Node = self.__head
         while nodeStep is not None:
             print(nodeStep.getVal(), end="->")
             nodeStep = nodeStep.getNext()
