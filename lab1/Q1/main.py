@@ -78,6 +78,8 @@ class FrontMiddleBackQueue:
             return -1
         else:
             lastNode = self.__getLastNode()
+            if lastNode is None or lastNode.prev is None:
+                return -1
             lastNode.prev.next = None
             self.size -= 1
             return lastNode.val
@@ -114,26 +116,26 @@ class FrontMiddleBackQueue:
                 node = node.next
         return string
     
-if __name__ == "__main__":
-    methods = ["FrontMiddleBackQueue","pushMiddle","pushMiddle","pushMiddle","popMiddle","popMiddle","popMiddle"]
-    var = [[],[1],[2],[3],[],[],[]]
-    operations = []
-    for i in range(len(methods)):
-        operations.append([methods[i], var[i]])
+# if __name__ == "__main__":
+#     methods = ["FrontMiddleBackQueue","popMiddle","popMiddle","pushMiddle","pushMiddle","popMiddle","popMiddle","popMiddle","popBack","popMiddle","popFront","pushBack","popFront","pushMiddle","pushMiddle","popMiddle","popBack","pushFront","popMiddle","pushMiddle","pushMiddle","pushMiddle","popMiddle","pushMiddle","popBack","pushMiddle","popMiddle","popMiddle","popMiddle","popMiddle","popFront","pushMiddle","pushMiddle","pushMiddle","pushFront"]
+#     var = [[],[],[],[773222],[279355],[],[],[],[],[],[],[448905],[],[168284],[874541],[],[],[15656],[],[803226],[720129],[626048],[],[860306],[],[630886],[],[],[],[],[],[837735],[414354],[404946],[88719]]
+#     operations = []
+#     for i in range(len(methods)):
+#         operations.append([methods[i], var[i]])
         
-    my_linked_list = FrontMiddleBackQueue()
-    for operation, args in operations:
-        print(operation, args)
-        if operation == "pushFront":
-            my_linked_list.pushFront(args[0])
-        elif operation == "pushMiddle":
-            my_linked_list.pushMiddle(args[0])
-        elif operation == "pushBack":
-            my_linked_list.pushBack(args[0])
-        elif operation == "popFront":
-            print(my_linked_list.popFront())
-        elif operation == "popMiddle":
-            print(my_linked_list.popMiddle())
-        elif operation == "popBack":
-            print(my_linked_list.popBack())
-        print(my_linked_list)
+#     my_linked_list = FrontMiddleBackQueue()
+#     for operation, args in operations:
+#         print(operation, args)
+#         if operation == "pushFront":
+#             my_linked_list.pushFront(args[0])
+#         elif operation == "pushMiddle":
+#             my_linked_list.pushMiddle(args[0])
+#         elif operation == "pushBack":
+#             my_linked_list.pushBack(args[0])
+#         elif operation == "popFront":
+#             print(my_linked_list.popFront())
+#         elif operation == "popMiddle":
+#             print(my_linked_list.popMiddle())
+#         elif operation == "popBack":
+#             print(my_linked_list.popBack())
+#         print(my_linked_list)
