@@ -43,30 +43,32 @@ class MyLinkedList:
             self.addAtHead(val)
             return
         nodeStep = self.__head
-        for i in range(index - 1):
+        for _ in range(index - 1):
             nodeStep = nodeStep.getNext()
             if nodeStep is None:
                 return
         nodeStep.setNext(Node(val, nodeStep.getNext()))
 
     def deleteAtIndex(self, index: int) -> None:
-        if(index == 0):
+        if index == 0:
             if self.__head is None:
                 return
             self.__head = self.__head.getNext()
-            return
-        
-        nodeStep: Node = self.__head
-        for i in range(index - 1):
-            nodeStep = nodeStep.getNext()
-            if nodeStep is None:
+        else:
+            if self.__head is None:
                 return
-
-        if nodeStep.getNext() is None:
-            return
-        if nodeStep.getNext().getNext() is None:
-            return
-        nodeStep.setNext(nodeStep.getNext().getNext())
+            previous: Node = self.__head
+            for _ in range(index - 1):
+                previous = previous.getNext()
+                if previous is None:
+                    return
+            
+            if previous.getNext() is None:
+                return
+            if previous.getNext().getNext() is None:
+                previous.setNext(None)
+                return
+            previous.setNext(previous.getNext().getNext())
 
     def printList(self) -> None:
         nodeStep: Node = self.__head
@@ -75,8 +77,8 @@ class MyLinkedList:
             nodeStep = nodeStep.getNext()
 
 if __name__ == "__main__":
-    methods = ["MyLinkedList","deleteAtIndex"]
-    var = [[],[0]]
+    methods = ["MyLinkedList","addAtHead","deleteAtIndex","addAtHead","addAtHead","addAtHead","addAtHead","addAtHead","addAtTail","get","deleteAtIndex","deleteAtIndex"]
+    var = [[],[2],[1],[2],[7],[3],[2],[5],[5],[5],[6],[4]]
     operations = []
     for i in range(len(methods)):
         operations.append([methods[i], var[i]])
