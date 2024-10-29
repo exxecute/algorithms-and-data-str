@@ -49,7 +49,8 @@ class MyLinkedList:
             nodeStep = nodeStep.getNext()
             if nodeStep is None:
                 return
-        nodeStep.setNext(Node(val, nodeStep.getNext()))
+        if nodeStep is not None:
+            nodeStep.setNext(Node(val, nodeStep.getNext()))
 
     def deleteAtIndex(self, index: int) -> None:
         if index == 0:
@@ -79,8 +80,8 @@ class MyLinkedList:
             nodeStep = nodeStep.getNext()
 
 if __name__ == "__main__":
-    methods = ["MyLinkedList","addAtHead","addAtTail","addAtIndex","get","deleteAtIndex","get","get","deleteAtIndex","deleteAtIndex","get","deleteAtIndex","get"]
-    var = [[],[1],[3],[1,2],[1],[1],[1],[3],[3],[0],[0],[0],[0]]
+    methods = ["MyLinkedList","addAtIndex","get"]
+    var = [[],[1,0],[0]]
     operations = []
     for i in range(len(methods)):
         operations.append([methods[i], var[i]])
