@@ -45,6 +45,8 @@ class MyLinkedList:
             self.addAtHead(val)
             return
         nodeStep = self.__head
+        if nodeStep is None:
+            return
         for _ in range(index - 1):
             nodeStep = nodeStep.getNext()
             if nodeStep is None:
@@ -80,8 +82,8 @@ class MyLinkedList:
             nodeStep = nodeStep.getNext()
 
 if __name__ == "__main__":
-    methods = ["MyLinkedList","addAtIndex","get"]
-    var = [[],[1,0],[0]]
+    methods = ["MyLinkedList","addAtIndex","addAtIndex","addAtTail","get","deleteAtIndex","get"]
+    var = [[],[2,1],[3,4],[1],[0],[0],[0]]
     operations = []
     for i in range(len(methods)):
         operations.append([methods[i], var[i]])
