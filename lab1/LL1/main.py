@@ -44,6 +44,10 @@ class MyLinkedList:
         nodeStep.setNext(Node(val, nodeStep.getNext()))
 
     def deleteAtIndex(self, index: int) -> None:
+        if(index == 0):
+            self.__head = self.__head.getNext()
+            return
+        
         nodeStep: Node = self.__head
         for i in range(index - 1):
             nodeStep = nodeStep.getNext()
