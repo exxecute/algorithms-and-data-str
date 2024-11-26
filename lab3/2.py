@@ -5,16 +5,18 @@ class Solution:
         n = len(isConnected)
         visited = [False] * n
         count = 0
-
-        def dfs(i):
-            visited[i] = True
-            for j in range(n):
-                if isConnected[i][j] == 1 and not visited[j]:
-                    dfs(j)
+        stack = []
 
         for i in range(n):
             if not visited[i]:
-                dfs(i)
+                stack.append(i)
+                while stack:
+                    node = stack.pop()
+                    if not visited[node]:
+                        visited[node] = True
+                        for j in range(n):
+                            if isConnected[node][j] == 1 and not visited[j]:
+                                stack.append(j)
                 count += 1
 
         return count
