@@ -1,7 +1,7 @@
 from typing import List
 
 class Solution(object):
-    def countPairs(self, n, edges):
+    def countPairs(self, n: int, edges: List[List[int]]):
         neighbors = [[] for _ in range(n)]
         for edge in edges:
             neighbors[edge[0]].append(edge[1])
