@@ -12,8 +12,6 @@ class Solution:
                     self.__checkTile(grid, i, j)
                     count += 1
 
-        for i in range(len(grid)):
-            print(grid[i])
         return count
     
     def __checkTile(self, grid, i, j):
