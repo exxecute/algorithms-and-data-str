@@ -1,34 +1,39 @@
-from collections import defaultdict
 from typing import List
-# Double DFS with memoization
 # O(n)
 
 class Solution:
     def sumOfDistancesInTree(self, n: int, edges: List[List[int]]) -> List[int]:
-        graph = defaultdict(list)
-        for source, target in edges: # undirected graph
-            graph[source].append(target)
-            graph[target].append(source)
+        graph = [[] for _ in range(n)]
+        for size, target in edges:
+            graph[size].append(target)
+            graph[target].append(size)
+        
+        count = [0] * n
+        ans = [0] * n
 
-        dist = [0] * n  # sum of distances to all other nodes
-        size = [1] * n  # subtree size including itself
+        count[0] = 1
+        stack = [(n, 0) for n in graph[0]]
+        while stack: # Calculate subtree size and sum of distances for each node
+            node, parent = stack[-1]
+            if count[node] == 0:
+                count[node] = 1
+                for neighbour in graph[node]:
+                    if neighbour == parent:
+                        continue
+                    stack.append((neighbour, node))
+            else:
+                stack.pop()
+                ans[parent] += ans[node] + count[node]
+                ans[node] = 0
+                count[parent] += count[node]
 
-        # Calculate subtree size and sum of distances for each node
-        def dfs1(node, parent):
-            for neighbor in graph[node]:
-                if neighbor != parent:
-                    dfs1(neighbor, node)
-                    size[node] += size[neighbor]
-                    dist[node] += dist[neighbor] + size[neighbor]
-        # Recalculate sum of distances for each node
-        # Take into account the size of the subtree of the current node and it's position in the tree
-        def dfs2(node, parent):
-            for neighbor in graph[node]:
-                if neighbor != parent:
-                    dist[neighbor] = dist[node] - size[neighbor] + (n - size[neighbor])
-                    dfs2(neighbor, node)
+        stack = [0]
+        while stack:# Recalculate sum of distances for each node
+            node = stack.pop()
+            for neighbour in graph[node]:
+                if ans[neighbour]:
+                    continue
+                ans[neighbour] = ans[node] + n - 2 * count[neighbour]
+                stack.append(neighbour)
 
-        dfs1(0, -1)
-        dfs2(0, -1)
-
-        return dist
+        return ans
