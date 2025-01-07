@@ -3,16 +3,16 @@ from typing import List
 class Solution:
     def maxArea(self, height: List[int]) -> int:
         max_area = 0
-        left = 0
-        right = len(height) - 1
+        left_index = 0
+        right_index = len(height) - 1
 
-        while left < right:
-            max_area = max(max_area, (right - left) * min(height[left], height[right]))
+        while left_index < right_index:
+            max_area = max(max_area, (right_index - left_index) * min(height[left_index], height[right_index]))
 
-            if height[left] < height[right]:
-                left += 1
+            if height[left_index] < height[right_index]:
+                left_index += 1
             else:
-                right -= 1
+                right_index -= 1
         
         return max_area
         
