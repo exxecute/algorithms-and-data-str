@@ -6,29 +6,40 @@ class Solution:
         Do not return anything, modify board in-place instead.
         """
         updated_board = [[0 for _ in range(len(board[0]))] for _ in range(len(board))]
-        for i in range(len(board)):
-            for j in range(len(board[0])):
+        neighborPoints = [(0,1),(0,-1),(1,0),(-1,0),(1,1),(1,-1),(-1,1),(-1,-1)]
+        max_y = len(board)
+        max_x = len(board[0])
+        for y in range(len(board)):
+            for x in range(len(board[0])):
                 neighbors = 0
-                for row in range(-1, 2):
-                    for col in range(-1, 2):
-                        if row == 0 and col == 0:
-                            continue
-                        if i + row < 0 or i + row >= len(board):
-                            continue
-                        if j + col < 0 or j + col >= len(board[0]):
-                            continue
-                        if board[i + row][j + col] == 1 or board[i + row][j + col] == -1:
-                            neighbors += 1
-                if board[i][j] == 1 and neighbors < 2 or neighbors > 3:
-                    updated_board[i][j] = -1
-                elif board[i][j] == 0 and neighbors == 3:
-                    updated_board[i][j] = 1
-                else:
-                    updated_board[i][j] = board[i][j]
-        for i in range(len(board)):
-            for j in range(len(board[0])):
-                if updated_board[i][j] == -1:
-                    board[i][j] = 0
-                elif updated_board[i][j] == 1:
-                    board[i][j] = 1
-        board = updated_board
+                for neighborPoint in neighborPoints:
+                    if ((neighborPoint[0] + x)) >= 0 and ((neighborPoint[0] + x) < max_x) and ((neighborPoint[1] + y) >= 0) and ((neighborPoint[1] + y) < max_y):
+                        neighbors += board[neighborPoint[1] + y][neighborPoint[0] + x]
+                cell = 0
+                if neighbors == 2 or neighbors == 3:
+                    if board[y][x] == 1:
+                        cell = 1
+                    else:
+                        if neighbors == 3:
+                            cell = 1
+                updated_board[y][x] = cell
+        for y in range(len(board)):
+            for x in range(len(board[0])):
+                board[y][x] = updated_board[y][x]
+
+
+board = [[0,1,0],[0,0,1],[1,1,1],[0,0,0]]
+Solution().gameOfLife(board)
+print(board)
+
+# 0 1
+# 0 0
+
+
+# 1
+# >2    0
+# =2,3  1
+# <3    0
+
+# 0
+# =3    1
